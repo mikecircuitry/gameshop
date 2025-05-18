@@ -17,6 +17,15 @@ export default function GameCard( prop: GameCardProp) {
     const {game} = prop;
     const { addToCart } = useCart();
 
+    const addToCartClicked = () => {
+        addToCart({
+            id: game.id,
+            name: game.name,
+            image: game.backgroundImage,
+            quantity: 1
+        });
+    }
+
     return (
         <div className="card h-100" >
             <img src={game.backgroundImage} className="card-img-top" alt="..."/>
@@ -26,7 +35,7 @@ export default function GameCard( prop: GameCardProp) {
                     Quis Quisque volutpat posuere metus non facilisis. Fusce nec nunc odio. Sed arcu nisi.
                 </p>
 
-                <button className="btn btn-primary" onClick={addToCart}>
+                <button className="btn btn-primary" onClick={addToCartClicked}>
                     Add to Cart
                 </button>
 
