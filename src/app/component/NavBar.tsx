@@ -3,7 +3,7 @@ import Link from "next/link";
 import {useCart} from "@/Contexts/CartContext.ts";
 
 export default function NavBar() {
-    const { cartCount } = useCart();
+    const { cart } = useCart();
 
     return (
         <nav className="navbar bg-body-tertiary bg-dark" data-bs-theme="dark">
@@ -13,13 +13,15 @@ export default function NavBar() {
                          className="d-inline-block align-text-top"/>
                     My Game Shop
                 </Link>
-                <Link className="navbar-brand text-whitex" href="/cart">
-                    <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="Cart" width="30" height="24"
-                         className="d-inline-block align-text-top"/>
+                <Link className="navbar-brand text-white" href="/cart">
+                    {/*<img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="Cart" width="30" height="24"*/}
+                    {/*     className="d-inline-block align-text-top"/>*/}
+                    <i className="bi bi-cart text-white"></i>
                     Cart
-                    {cartCount > 0 && (
-                        <span className="position-absolutex top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                            {cartCount}
+                    {cart.itemCount > 0 && (
+                        <span
+                            className="position-absolutex top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            {cart.itemCount}
                         </span>
                     )}
                 </Link>
