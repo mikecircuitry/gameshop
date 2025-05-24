@@ -1,6 +1,6 @@
 'use client'
 import Link from "next/link";
-import {useCart} from "@/Contexts/CartContext.ts";
+import {useCart} from "@/contexts/cartContext";
 
 export default function NavBar() {
     const { cart } = useCart();

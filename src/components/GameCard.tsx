@@ -1,20 +1,17 @@
 'use client'
 import Link from "next/link";
-import {useCart} from "@/Contexts/CartContext.ts";
+import {useCart} from "@/contexts/cartContext";
+import {ReactNode} from "react";
+import {Game} from "@/models";
 
-export interface Game  {
-    id: number;
-    name: string;
-    backgroundImage: string;
-    rating: number;
-}
 
 export interface GameCardProp {
-    game: Game
+    game: Game;
+    children?: ReactNode;
 }
 
-export default function GameCard( prop: GameCardProp) {
-    const {game} = prop;
+export default function GameCard({game, children}: GameCardProp) {
+   // const {game} = prop;
     const { addToCart } = useCart();
 
     const addToCartClicked = () => {
@@ -34,7 +31,7 @@ export default function GameCard( prop: GameCardProp) {
                 <p className="card-text">
                     Quis Quisque volutpat posuere metus non facilisis. Fusce nec nunc odio. Sed arcu nisi.
                 </p>
-
+                {children}
                 <button className="btn btn-primary" onClick={addToCartClicked}>
                     Add to Cart
                 </button>

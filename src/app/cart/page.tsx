@@ -1,4 +1,4 @@
-import CartProductList from "@/app/cart/components/cartProductList";
+import CartProductList from "@/components/cartProductList";
 
 
 export  default function Cart () {
