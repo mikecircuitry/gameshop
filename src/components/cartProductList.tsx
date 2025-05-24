@@ -1,6 +1,6 @@
 'use client'
-import {useCart} from "@/Contexts/CartContext.ts";
-import ProductListItem from "@/app/cart/components/productItem";
+import {useCart} from "@/contexts/cartContext";
+import ProductListItem from "@/components/productItem";
 
 export default function CartProductList() {
     const { cart } = useCart();
@@ -13,7 +13,7 @@ export default function CartProductList() {
             { !cart.itemCount && <p>Your cart is empty.</p> }
             { cart.itemCount > 0 && (
                 <div>
-                    <h2>Items in your cart:</h2>
+                    <h4>{cart.itemCount} Items in your cart:</h4>
                     
                         {cart.items.map((item) => (
                             <div className="row" key={item.id} style={{ paddingBottom: "20px" }} >

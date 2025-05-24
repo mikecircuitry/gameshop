@@ -1,46 +1,11 @@
-//'use client'
-//import {Game} from "@/app/game/Components/GameCard";
-
-import {useCart} from "@/Contexts/CartContext.ts";
-
-interface GameDetails {
-    id:number;
-    name: string;
-    description:string;
-    backgroundImage:string;
-    rating:number;
-}
-
-interface GameDetailsApiResponse {
-    id:number;
-    name: string;
-    description:string;
-    background_image:string;
-    rating:number;
-}
-
-const mapGameDetailsApiResponsetoGameDetails = (apiData: GameDetailsApiResponse): GameDetails => {
-    return {
-        id: apiData.id,
-        name: apiData.name,
-        description: apiData.description,
-        backgroundImage: apiData.background_image,
-        rating: apiData.rating
-    }
-}
+import {GameItemResponse} from "@/models/responses";
+import {GameDetails} from "@/models";
 
 export default async function details({params} : {params: Promise<{id: number}>}) {
-
     const {id} = await  params;
-    console.log("what is this value Prop =>", id);
+    const gameDetails = await getGameDetails(id);
 
-    const response = await fetch(`https://api.rawg.io/api/games/${id}?key=fe565b13a3474b92bacee0ca58a37b12`);
-    const data: GameDetailsApiResponse = await response.json();
-
-    // const { addToCart } = useCart();
-    const gameDetails = mapGameDetailsApiResponsetoGameDetails(data);
     return (
-        <>
             <div className="card">
                 <img src={gameDetails.backgroundImage} className="card-img-top" alt={gameDetails.name}/>
                 <div className="card-body">
@@ -56,6 +21,22 @@ export default async function details({params} : {params: Promise<{id: number}>}
                     </div>
                 </div>
             </div>
-        </>
     )
+}
+
+const getGameDetails = async (id: number): Promise<GameDetails> => {
+    const response = await fetch(`https://api.rawg.io/api/games/${id}?key=${process.env.NEXT_PUBLIC_API_KEY}`);
+    const data: GameItemResponse = await response.json();
+    console.log("GAME ITEM ==> ", data);
+    return  mapGameDetailsApiResponsetoGameDetails(data);
+}
+
+const mapGameDetailsApiResponsetoGameDetails = (apiData: GameItemResponse): GameDetails => {
+    return {
+        id: apiData.id,
+        name: apiData.name,
+        description: apiData.description_raw,
+        backgroundImage: apiData.background_image,
+        rating: apiData.rating
+    }
 }

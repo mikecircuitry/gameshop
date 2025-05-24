@@ -11,3 +11,19 @@ export interface Product {
     image: string;
     quantity: number;
 }
+
+
+export interface Game  {
+    id: number;
+    name: string;
+    backgroundImage: string;
+    rating: number;
+}
+
+export interface GameDetails {
+    id: number;
+    name: string;
+    backgroundImage: string;
+    rating: number;
+    description: string;
+}

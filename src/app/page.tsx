@@ -1,4 +1,4 @@
-import GameGrid from "@/app/game/Components/GameGrid";
+import GameGrid from "@/components/GameGrid";
 
 export default function page() {
     return (
