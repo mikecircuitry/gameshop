@@ -1,28 +1,36 @@
-
-
 export interface gameApiResponse {
-    results: GameDetailsApiResponse[]
+  results: GameDetailsApiResponse[];
 }
 
 export interface GameDetailsApiResponse {
-    id:number;
-    name: string;
-    background_image:string;
-    rating:number;
-    description: string;
-    description_raw: string;
+  id: number;
+  name: string;
+  background_image: string;
+  rating: number;
+  description: string;
+  description_raw: string;
+  released?: string;
 }
 
 export interface GameItemResponse {
-    id: number;
+  id: number;
+  name: string;
+  background_image: string;
+  rating: number;
+  description: string;
+  description_raw: string;
+  released: string;
+  website: string;
+  metacritic: number;
+  developers: {
     name: string;
-    background_image: string;
-    rating: number;
-    description: string;
-    description_raw: string;
-    released: string;
-    website: string;
-    metacritic: number;
-    // genres: Genre[];
-    // platforms: Platform[];
+  }[];
+  platforms: {
+    platform: {
+      id: number;
+      name: string;
+    };
+  }[];
+  // genres: Genre[];
+  // platforms: Platform[];
 }
