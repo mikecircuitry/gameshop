@@ -5,7 +5,7 @@ import "./globals.css";
 import AddBootstrap from "@/components/AddBootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavBar from "@/components/NavBar";
-import { CartProvider } from "@/contexts/cartContext.tsx";
+import { CartProvider } from "@/contexts/cartContext";
 
 
 const geistSans = Geist({
