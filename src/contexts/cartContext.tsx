@@ -31,7 +31,7 @@ export function CartProvider({children}: { children: ReactNode }) {
     useEffect(() => {
         console.log("Cart updated:",cart)
         localStorage.setItem("cart", JSON.stringify(cart));
-    }, [cart],);
+    }, [cart]);
 
     const addToCart = (item: Product) => {
         // Check if the item already exists in the cart
@@ -47,16 +47,16 @@ export function CartProvider({children}: { children: ReactNode }) {
             setCart((prev) => ({
                 ...prev,
                 items: [...prev.items, {...item}],
-                itemCount: prev.itemCount + item.quantity,
+                itemCount: prev.itemCount + 1,
             }));
         } else {
             // If it exists, update the quantity
             setCart((prev) => ({
                 ...prev,
                 items: prev.items.map((x) =>
-                    x.id === item.id ? {...x, quantity: x.quantity + item.quantity} : x
+                    x.id === item.id ? {...x, quantity: x.quantity + 1} : x
                 ),
-                itemCount: prev.itemCount + item.quantity,
+                itemCount: prev.itemCount + 1,
             }));
         }
 

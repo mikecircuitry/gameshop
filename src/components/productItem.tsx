@@ -7,12 +7,12 @@ interface ProductListItemProp {
 }
 
 export default function ProductListItem({product}: ProductListItemProp) {
- const { cart } = useCart();
-    const [ currentCart, setCart] = useState(cart);
-    const defaultQuantity = product.quantity;
-    const [ quantity, setQuantity] = useState(defaultQuantity);
+ const {  addToCart} = useCart();
+    //const [ currentCart, setCart] = useState(cart);
+   // const defaultQuantity = product.quantity;
+    //const [ quantity, setQuantity] = useState(defaultQuantity);
 
-
+    console.log("product info ==> ", product);
     // const addToCartClicked = () => {
     //     addToCart({
     //         id: product.id,
@@ -22,28 +22,22 @@ export default function ProductListItem({product}: ProductListItemProp) {
     //     });
     // }
 
-    const item = currentCart.items.find((x) => x.id === product.id);
+    //const item = currentCart.items.find((x) => x.id === product.id);
 
     const increaseQuantity = () => {
         console.log("increase quantity clicked");
 
-    product.quantity = product.quantity + 1;
-    setQuantity((prev) => prev + 1);
+    //item.quantity = product.quantity + 1;
+    // setQuantity((prev) => prev + 1);
     //     setCart((prev) => ({
     //         ...prev,
     //         items: prev.items.map((x) => x.id === product.id ? {...x, quantity: x.quantity + 1} : x),
     //         itemCount: prev.itemCount + 1,
     //     }));
-        // if(item)
-        // {
-        //     item.quantity = item.quantity + 1;
-        //     addToCart({
-        //         id: product.id,
-        //         name: product.name,
-        //         image: product.image,
-        //         quantity: item.quantity,
-        //     });
-        // }
+
+        addToCart(product);
+
+
 
         // console.log(item);
         //
@@ -73,7 +67,7 @@ export default function ProductListItem({product}: ProductListItemProp) {
                                 <span>  - </span>
                             </button>
                             <input type="text" className="col-sm-2 text-center" style={{backgroundColor: "#fff", color: "#000"}} id={product.name}
-                                readOnly={true}   value={product.quantity} />
+                                readOnly={true}  value={product.quantity} />
 
 
                             <button className="input-groupx btn btn-light col-sm-1"
