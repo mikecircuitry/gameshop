@@ -6,17 +6,19 @@ interface CartContextType {
     cart: Cart;
     addToCart: (item: Product) => void;
     clearCart: () => void;
+    itemCount: number;
+    removeFromCart: (item: Product) => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
+const defaultCart: Cart = {
+    id: 0,
+    items: []
+}
 
 export function CartProvider({children}: { children: ReactNode }) {
-    const defaultCart: Cart = {
-        id: 0,
-        itemCount: 0,
-        items: []
-    }
     const [cart, setCart] = useState(defaultCart);
+    const itemCount = cart.items.reduce((acc, x) => acc + x.quantity, 0);
 
     // Load cart count from localStorage on initialization
     useEffect(() => {
@@ -29,7 +31,6 @@ export function CartProvider({children}: { children: ReactNode }) {
 
     // Update localStorage whenever cartCount changes
     useEffect(() => {
-        console.log("Cart updated:",cart)
         localStorage.setItem("cart", JSON.stringify(cart));
     }, [cart]);
 
@@ -37,29 +38,11 @@ export function CartProvider({children}: { children: ReactNode }) {
         // Check if the item already exists in the cart
         const existingItem = cart.items.find((x) => x.id === item.id);
 
-        console.log(item);
-        if (!existingItem) {
-            // cart.items.push(item);
-            // cart.itemCount += item.quantity;
-            //
-            // console.log(cart);
-
-            setCart((prev) => ({
-                ...prev,
-                items: [...prev.items, {...item}],
-                itemCount: prev.itemCount + 1,
-            }));
-        } else {
-            // If it exists, update the quantity
-            setCart((prev) => ({
-                ...prev,
-                items: prev.items.map((x) =>
-                    x.id === item.id ? {...x, quantity: x.quantity + 1} : x
-                ),
-                itemCount: prev.itemCount + 1,
-            }));
-        }
-
+        setCart((prev) => ({
+            ...prev,
+            items: !existingItem ? [...prev.items, {...item}] : prev.items.map((x) =>
+                x.id === item.id ? {...x, quantity: item.quantity} : x)
+        }));
     };
 
     const clearCart = () => {
@@ -67,13 +50,20 @@ export function CartProvider({children}: { children: ReactNode }) {
         localStorage.setItem("cart", JSON.stringify(defaultCart));
     }
 
+    const removeFromCart = (item: Product) => {
+        const remainingItems = cart.items.filter((x) => x.id != item.id);
+        setCart((prev) => ({
+            ...prev,
+            items: remainingItems
+        }));
+    }
+
     return (
 
-        <CartContext.Provider value={{cart, addToCart, clearCart}}>
+        <CartContext.Provider value={{cart, addToCart, clearCart, itemCount, removeFromCart}}>
             {children}
         </CartContext.Provider>
     );
-
 }
 
 export function useCart() {

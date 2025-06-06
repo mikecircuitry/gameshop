@@ -1,52 +1,25 @@
 import {Product} from "@/models";
 import {useCart} from "@/contexts/cartContext";
-import {useState} from "react";
 
 interface ProductListItemProp {
     product: Product;
 }
 
 export default function ProductListItem({product}: ProductListItemProp) {
- const {  addToCart} = useCart();
-    //const [ currentCart, setCart] = useState(cart);
-   // const defaultQuantity = product.quantity;
-    //const [ quantity, setQuantity] = useState(defaultQuantity);
-
-    console.log("product info ==> ", product);
-    // const addToCartClicked = () => {
-    //     addToCart({
-    //         id: product.id,
-    //         name: product.name,
-    //         image: product.image,
-    //         quantity: 1,
-    //     });
-    // }
-
-    //const item = currentCart.items.find((x) => x.id === product.id);
+    const {addToCart, removeFromCart} = useCart();
 
     const increaseQuantity = () => {
-        console.log("increase quantity clicked");
-
-    //item.quantity = product.quantity + 1;
-    // setQuantity((prev) => prev + 1);
-    //     setCart((prev) => ({
-    //         ...prev,
-    //         items: prev.items.map((x) => x.id === product.id ? {...x, quantity: x.quantity + 1} : x),
-    //         itemCount: prev.itemCount + 1,
-    //     }));
-
+        product.quantity += 1;
         addToCart(product);
+    }
 
-
-
-        // console.log(item);
-        //
-        // currentCart.itemCount = currentCart.items.reduce((count, x) => count + x.quantity, 0);
-        //
-        //
-        //
-        // setCart(currentCart);
-        // console.log(currentCart);
+    const decreaseQuantity = () => {
+        if (product.quantity > 1) {
+            product.quantity -= 1;
+            addToCart(product);
+        } else {
+            removeFromCart(product);
+        }
     }
 
     return (
@@ -55,19 +28,20 @@ export default function ProductListItem({product}: ProductListItemProp) {
             <div className="card-body">
                 <div className="row">
                     <div className="col-md-2">
-                        <img src={product.image} className="rounded float-start card-img-top" alt={product.name}  />
+                        <img src={product.image} className="rounded float-start card-img-top" alt={product.name}/>
                     </div>
                     <div className="col-md-4">
-                        <h5 className="card-title text-centerx" style={{paddingTop:"7%"}}>{product.name}</h5>
+                        <h5 className="card-title text-centerx" style={{paddingTop: "7%"}}>{product.name}</h5>
                     </div>
-                    <div className="col-sm-4">
+                    <div className="col-sm-2">
                         <div className="input-group mb-3">
                             <button className="input-groupx btn btn-light col-sm-1"
-                            >
+                                    onClick={decreaseQuantity}>
                                 <span>  - </span>
                             </button>
-                            <input type="text" className="col-sm-2 text-center" style={{backgroundColor: "#fff", color: "#000"}} id={product.name}
-                                readOnly={true}  value={product.quantity} />
+                            <input type="text" className="col-sm-2 text-center"
+                                   style={{backgroundColor: "#fff", color: "#000"}} id={product.name}
+                                   readOnly={true} value={product.quantity}/>
 
 
                             <button className="input-groupx btn btn-light col-sm-1"
@@ -80,8 +54,11 @@ export default function ProductListItem({product}: ProductListItemProp) {
                         </div>
 
 
-
                         {/*<h5 className="card-title text-centerx" style={{paddingTop: "7%"}}>{item.quantity}</h5>*/}
+                    </div>
+                    <div className="col-sm-2">
+                        <a href="#" className="text-danger" onClick={() => removeFromCart(product)}>remove</a>
+
                     </div>
                 </div>
 
