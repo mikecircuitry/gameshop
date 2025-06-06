@@ -1,11 +1,47 @@
 import {Product} from "@/models";
+import {useCart} from "@/contexts/cartContext";
+import {useState} from "react";
 
 interface ProductListItemProp {
     product: Product;
 }
 
-export default function ProductListItem(prop: ProductListItemProp) {
-const item = prop.product;
+export default function ProductListItem({product}: ProductListItemProp) {
+ const { cart, addToCart } = useCart();
+    const [currentCart, setCart] = useState(cart);
+    // const addToCartClicked = () => {
+    //     addToCart({
+    //         id: product.id,
+    //         name: product.name,
+    //         image: product.image,
+    //         quantity: 1,
+    //     });
+    // }
+
+    const item = currentCart.items.find((x) => x.id === product.id);
+
+    const increaseQuantity = () => {
+
+        if(item)
+        {
+            item.quantity = item.quantity + 1;
+            addToCart({
+                id: product.id,
+                name: product.name,
+                image: product.image,
+                quantity: item.quantity,
+            });
+        }
+
+        // console.log(item);
+        //
+        // currentCart.itemCount = currentCart.items.reduce((count, x) => count + x.quantity, 0);
+        //
+        //
+        //
+        // setCart(currentCart);
+        // console.log(currentCart);
+    }
 
     return (
         <div className="card">
@@ -13,19 +49,21 @@ const item = prop.product;
             <div className="card-body">
                 <div className="row">
                     <div className="col-md-2">
-                        <img src={item.image} className="rounded float-start card-img-top" alt={item.name}  />
+                        <img src={product.image} className="rounded float-start card-img-top" alt={product.name}  />
                     </div>
                     <div className="col-md-4">
-                        <h5 className="card-title text-centerx" style={{paddingTop:"7%"}}>{item.name}</h5>
+                        <h5 className="card-title text-centerx" style={{paddingTop:"7%"}}>{product.name}</h5>
                     </div>
                     <div className="col-sm-4">
                         <div className="input-group mb-3">
-                            <button className="input-groupx btn btn-light col-sm-1">
+                            <button className="input-groupx btn btn-light col-sm-1"
+                            >
                                 <span>  - </span>
                             </button>
-                            <input type="text" className="col-sm-2 text-center" style={{backgroundColor: "#fff", color: "#000"}} id={item.name}
-                                   value={item.quantity}/>
-                            <button className="input-groupx btn btn-light col-sm-1">
+                            <input type="text" className="col-sm-2 text-center" style={{backgroundColor: "#fff", color: "#000"}} id={product.name}
+                                   defaultValue={product.quantity}/>
+                            <button className="input-groupx btn btn-light col-sm-1"
+                                    onClick={increaseQuantity}>
                                 <span>  + </span>
                             </button>
                             {/*<span className="input-group-text" id="basic-addon1">@</span>*/}

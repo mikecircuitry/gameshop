@@ -1,21 +1,22 @@
 'use client'
-import { createContext, useContext, useState, ReactNode, useEffect } from "react";
+import {createContext, useContext, useState, ReactNode, useEffect} from "react";
 import {Cart, Product} from "@/models";
 
 interface CartContextType {
     cart: Cart;
     addToCart: (item: Product) => void;
+    clearCart: () => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
-export function CartProvider({ children }: { children: ReactNode }) {
-    const newCart : Cart = {
+export function CartProvider({children}: { children: ReactNode }) {
+    const defaultCart: Cart = {
         id: 0,
         itemCount: 0,
         items: []
     }
-    const [cart, setCart] = useState(newCart);
+    const [cart, setCart] = useState(defaultCart);
 
     // Load cart count from localStorage on initialization
     useEffect(() => {
@@ -28,37 +29,47 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
     // Update localStorage whenever cartCount changes
     useEffect(() => {
+        console.log("Cart updated:",cart)
         localStorage.setItem("cart", JSON.stringify(cart));
-    }, [cart]);
+    }, [cart],);
 
     const addToCart = (item: Product) => {
-
         // Check if the item already exists in the cart
-         const existingItem = cart.items.find((x) => x.id === item.id);
+        const existingItem = cart.items.find((x) => x.id === item.id);
 
-         if (!existingItem) {
-             setCart((prev) => ({
-                 ...prev,
-                    items: [...prev.items, { ...item, quantity: 1 }],
-                 itemCount: prev.itemCount + 1,
-             }));
-         }
-         else{
-                // If it exists, update the quantity
-                setCart((prev) => ({
-                    ...prev,
-                    items: prev.items.map((x) =>
-                        x.id === item.id ? { ...x, quantity: x.quantity + 1 } : x
-                    ),
-                    itemCount: prev.itemCount + 1
-                }));
-         }
+        console.log(item);
+        if (!existingItem) {
+            // cart.items.push(item);
+            // cart.itemCount += item.quantity;
+            //
+            // console.log(cart);
+
+            setCart((prev) => ({
+                ...prev,
+                items: [...prev.items, {...item}],
+                itemCount: prev.itemCount + item.quantity,
+            }));
+        } else {
+            // If it exists, update the quantity
+            setCart((prev) => ({
+                ...prev,
+                items: prev.items.map((x) =>
+                    x.id === item.id ? {...x, quantity: x.quantity + item.quantity} : x
+                ),
+                itemCount: prev.itemCount + item.quantity,
+            }));
+        }
 
     };
 
+    const clearCart = () => {
+        setCart(defaultCart);
+        localStorage.setItem("cart", JSON.stringify(defaultCart));
+    }
+
     return (
 
-        <CartContext.Provider value={{ cart, addToCart }}>
+        <CartContext.Provider value={{cart, addToCart, clearCart}}>
             {children}
         </CartContext.Provider>
     );

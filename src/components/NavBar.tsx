@@ -8,7 +8,7 @@ export default function NavBar() {
     return (
         <nav className="navbar bg-body-tertiary bg-dark" data-bs-theme="dark">
             <div className="container-fluid">
-                <Link className="navbar-brand" href="/game">
+                <Link className="navbar-brand" href="/">
                     <img src="https://gmedia.playstation.com/is/image/SIEPDC/dualsense-controller-product-thumbnail-01-en-14sep21?$facebook$" alt="Logo" width="30" height="24"
                          className="d-inline-block align-text-top"/>
                     My Game Shop

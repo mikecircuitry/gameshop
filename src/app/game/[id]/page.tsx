@@ -1,6 +1,5 @@
-import { GameItemResponse } from "@/models/responses";
-import { GameDetails } from "@/models";
 import Sidebar from "./sidebar";
+import {getGameDetails} from "@/services/gameService";
 
 export default async function details({
   params,
@@ -37,28 +36,4 @@ export default async function details({
   );
 }
 
-const getGameDetails = async (id: number): Promise<GameDetails> => {
-  const response = await fetch(
-    `https://api.rawg.io/api/games/${id}?key=${process.env.NEXT_PUBLIC_API_KEY}`
-  );
-  const data: GameItemResponse = await response.json();
 
-  return mapGameDetailsApiResponsetoGameDetails(data);
-};
-
-const mapGameDetailsApiResponsetoGameDetails = (
-  apiData: GameItemResponse
-): GameDetails => {
-  return {
-    id: apiData.id,
-    name: apiData.name,
-    description: apiData.description_raw,
-    backgroundImage: apiData.background_image,
-    rating: apiData.rating,
-    developer: apiData.developers[0].name,
-    platforms: apiData.platforms.map((x) => ({
-      id: x.platform.id,
-      name: x.platform.name,
-    })),
-  };
-};

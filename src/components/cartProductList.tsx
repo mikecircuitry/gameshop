@@ -3,7 +3,7 @@ import {useCart} from "@/contexts/cartContext";
 import ProductListItem from "@/components/productItem";
 
 export default function CartProductList() {
-    const { cart } = useCart();
+    const { cart, clearCart } = useCart();
 
     //cart design inspirations
     // https://bootstrapexamples.com/@mason/clean-commerce-cart-design
@@ -12,7 +12,9 @@ export default function CartProductList() {
             <h1>Cart</h1>
             { !cart.itemCount && <p>Your cart is empty.</p> }
             { cart.itemCount > 0 && (
+
                 <div>
+                    <a href="#" onClick={clearCart} className="text-danger"> Clear Cart</a>
                     <h4>{cart.itemCount} Items in your cart:</h4>
                     
                         {cart.items.map((item) => (
