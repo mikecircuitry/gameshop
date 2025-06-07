@@ -6,7 +6,7 @@ interface CartContextType {
     cart: Cart;
     addToCart: (item: Product) => void;
     clearCart: () => void;
-    itemCount: number;
+    cartItemCount: number;
     removeFromCart: (item: Product) => void;
 }
 
@@ -18,7 +18,7 @@ const defaultCart: Cart = {
 
 export function CartProvider({children}: { children: ReactNode }) {
     const [cart, setCart] = useState(defaultCart);
-    const itemCount = cart.items.reduce((acc, x) => acc + x.quantity, 0);
+    const cartItemCount = cart.items.reduce((acc, x) => acc + x.quantity, 0);
 
     // Load cart count from localStorage on initialization
     useEffect(() => {
@@ -58,9 +58,11 @@ export function CartProvider({children}: { children: ReactNode }) {
         }));
     }
 
+
+
     return (
 
-        <CartContext.Provider value={{cart, addToCart, clearCart, itemCount, removeFromCart}}>
+        <CartContext.Provider value={{cart, addToCart, clearCart, cartItemCount, removeFromCart}}>
             {children}
         </CartContext.Provider>
     );
