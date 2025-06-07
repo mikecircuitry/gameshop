@@ -3,12 +3,12 @@ import Link from "next/link";
 import {useCart} from "@/contexts/cartContext";
 
 export default function NavBar() {
-    const { cart } = useCart();
+    const { itemCount } = useCart();
 
     return (
         <nav className="navbar bg-body-tertiary bg-dark" data-bs-theme="dark">
             <div className="container-fluid">
-                <Link className="navbar-brand" href="/game">
+                <Link className="navbar-brand" href="/">
                     <img src="https://gmedia.playstation.com/is/image/SIEPDC/dualsense-controller-product-thumbnail-01-en-14sep21?$facebook$" alt="Logo" width="30" height="24"
                          className="d-inline-block align-text-top"/>
                     My Game Shop
@@ -18,10 +18,10 @@ export default function NavBar() {
                     {/*     className="d-inline-block align-text-top"/>*/}
                     <i className="bi bi-cart text-white"></i>
                     Cart
-                    {cart.itemCount > 0 && (
+                    {itemCount > 0 && (
                         <span
                             className="position-absolutex top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                            {cart.itemCount}
+                            {itemCount}
                         </span>
                     )}
                 </Link>

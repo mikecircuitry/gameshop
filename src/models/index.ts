@@ -1,6 +1,5 @@
 export interface Cart {
   id: number;
-  itemCount: number;
   items: Product[];
 }
 

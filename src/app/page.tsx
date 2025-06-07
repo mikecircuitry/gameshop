@@ -1,10 +1,12 @@
 import GameGrid from "@/components/GameGrid";
+import {getPagedGames} from "@/services/gameService";
 
-export default function page() {
+export default async function page() {
+    const games = await getPagedGames();
+
     return (
         <div>
-
-            <GameGrid />
+            <GameGrid games={games}/>
         </div>
     );
 }
