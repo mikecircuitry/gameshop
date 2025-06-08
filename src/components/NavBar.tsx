@@ -3,7 +3,7 @@ import Link from "next/link";
 import {useCart} from "@/contexts/cartContext";
 
 export default function NavBar() {
-    const { itemCount } = useCart();
+    const { cartItemCount } = useCart();
 
     return (
         <nav className="navbar bg-body-tertiary bg-dark" data-bs-theme="dark">
@@ -18,10 +18,10 @@ export default function NavBar() {
                     {/*     className="d-inline-block align-text-top"/>*/}
                     <i className="bi bi-cart text-white"></i>
                     Cart
-                    {itemCount > 0 && (
+                    {cartItemCount > 0 && (
                         <span
                             className="position-absolutex top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                            {itemCount}
+                            {cartItemCount}
                         </span>
                     )}
                 </Link>

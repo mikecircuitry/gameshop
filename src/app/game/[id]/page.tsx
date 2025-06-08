@@ -21,13 +21,6 @@ export default async function details({
           <div className="card-body">
             <h5 className="card-title">{gameDetails.name}</h5>
             <p className="card-text">{gameDetails.description}</p>
-            <div className="row">
-              <div className="col-12">
-                {/*<button className="btn btn-primary" onClick={addToCart}>*/}
-                {/*    Add to Cart*/}
-                {/*</button>*/}
-              </div>
-            </div>
           </div>
         </div>
       </div>
