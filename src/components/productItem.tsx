@@ -48,17 +48,11 @@ export default function ProductListItem({product}: ProductListItemProp) {
                                     onClick={increaseQuantity}>
                                 <span>  + </span>
                             </button>
-                            {/*<span className="input-group-text" id="basic-addon1">@</span>*/}
-                            {/*<input type="text" className="form-control" placeholder="Username" aria-label="Username"*/}
-                            {/*       aria-describedby="basic-addon1"/>*/}
+
                         </div>
-
-
-                        {/*<h5 className="card-title text-centerx" style={{paddingTop: "7%"}}>{item.quantity}</h5>*/}
                     </div>
                     <div className="col-sm-2">
                         <a href="#" className="text-danger" onClick={() => removeFromCart(product)}>remove</a>
-
                     </div>
                 </div>
 

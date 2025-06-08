@@ -1,5 +1,4 @@
 "use client";
-
 import {useCart} from "@/contexts/cartContext";
 import {GameDetails} from "@/models";
 
@@ -16,7 +15,7 @@ export default function Sidebar({gameInfo}: SidebarProps) {
             name: gameInfo.name,
             image: gameInfo.backgroundImage,
             quantity: 1,
-            price: 29.99, // Assuming a fixed price for the game
+            price: 29.99, // TODO: Replace with dynamic price
         });
     };
 
@@ -39,18 +38,19 @@ export default function Sidebar({gameInfo}: SidebarProps) {
                     </div>
                 </div>
 
-                {/* <div className="row">
-          <div className="col-sm-12">
-            <h5>Platforms</h5>
-            <ul className="list-group">
-              {gameInfo.platforms.map((x) => (
-                <li key={x.id} className="list-group-item">
-                  {x.name}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div> */}
+                <div className="row">
+                    {/* TODO: Make this a drop down list of game platforms to choose from */}
+                    {/*<div className="col-sm-12">*/}
+                    {/*  <h5>Platforms</h5>*/}
+                    {/*  <ul className="list-group">*/}
+                    {/*    {gameInfo.platforms.map((x) => (*/}
+                    {/*      <li key={x.id} className="list-group-item">*/}
+                    {/*        {x.name}*/}
+                    {/*      </li>*/}
+                    {/*    ))}*/}
+                    {/*  </ul>*/}
+                    {/*</div>*/}
+                </div>
 
                 <button
                     className="btn btn-danger"
