@@ -32,6 +32,7 @@ export default function ProductListItem({product}: ProductListItemProp) {
                     </div>
                     <div className="col-md-4">
                         <h5 className="card-title text-centerx" style={{paddingTop: "7%"}}>{product.name}</h5>
+                        <p>Platform: <b>{product.platform}</b></p>
                     </div>
                     <div className="col-sm-2">
                         <div className="input-group mb-3">
