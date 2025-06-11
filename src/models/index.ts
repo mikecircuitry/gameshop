@@ -9,6 +9,7 @@ export interface Product {
     image: string;
     quantity: number;
     price: number;
+    platform: GamePlatform
 }
 
 export interface Game {
@@ -31,4 +32,13 @@ export interface GameDetails {
 export interface GameDetailPlatform {
     id: number;
     name: string;
+}
+
+export enum GamePlatform {
+    PC = "PC",
+    PS4 = "PS4",
+    PS5 = "PS5",
+    XBOX_ONE = "XBOX ONE",
+    XBOX_SERIES_X = "XBOX SERIES X",
+    NINTENDO_SWITCH = "NINTENDO SWITCH"
 }

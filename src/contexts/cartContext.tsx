@@ -36,7 +36,7 @@ export function CartProvider({children}: { children: ReactNode }) {
 
     const addToCart = (item: Product) => {
         // Check if the item already exists in the cart
-        const existingItem = cart.items.find((x) => x.id === item.id);
+        const existingItem = cart.items.find((x) => x.id === item.id && x.platform === item.platform);
 
         setCart((prev) => ({
             ...prev,
