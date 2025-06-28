@@ -2,8 +2,13 @@ import GameGrid from "@/components/GameGrid";
 import Pagination from "@/components/Pagination";
 import {getPagedGames} from "@/services/gameService";
 
-export default async function page() {
-    const pageNo = 1; // Default to page 1 for main page
+export default async function page({params}: {
+    params: Promise<{ id: string }>;
+}) {
+
+    const {id} = await params;
+
+    const pageNo =  Number(id);
     const gameResponse = await getPagedGames(pageNo);
 
     return (
