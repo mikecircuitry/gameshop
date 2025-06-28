@@ -1,19 +1,31 @@
 import {Game, GameDetails} from "@/models";
-import {gameApiResponse, GameDetailsApiResponse, GameItemResponse} from "@/models/responses";
+import {
+    GameApiResponse,
+    GameDetailsApiResponse,
+    GameItemResponse,
+    PagedGameResponse
+} from "@/models/responses";
 
 const gameApiUrl = process.env.NEXT_PUBLIC_API_URL;
 const gameApiKey = process.env.NEXT_PUBLIC_API_KEY;
 
-export const getPagedGames = async (): Promise<Game[]> => {
-    const response = await fetch(`${gameApiUrl}?key=${gameApiKey}&page_size=12`);
-    const data = await response.json() as gameApiResponse;
+export const getPagedGames = async (pageNum: number = 1): Promise<PagedGameResponse> => {
+    const response = await fetch(`${gameApiUrl}?key=${gameApiKey}&page=${pageNum}&page_size=21`);
+    const data = await response.json() as GameApiResponse;
 
-    return data.results.map((x: GameDetailsApiResponse): Game => ({
-        id: x.id,
-        name: x.name,
-        backgroundImage: x.background_image,
-        rating: x.rating
-    })) || [];
+    return {
+        recordCount: data.count,
+        games: data.results.map(mapGameApiResponseToGames)
+    };
+}
+
+const mapGameApiResponseToGames = (apiGameData: GameDetailsApiResponse): Game => {
+    return {
+        id: apiGameData.id,
+        name: apiGameData.name,
+        backgroundImage: apiGameData.background_image,
+        rating: apiGameData.rating
+    }
 }
 
 export const getGameDetails = async (id: number): Promise<GameDetails> => {

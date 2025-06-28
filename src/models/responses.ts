@@ -1,4 +1,7 @@
-export interface gameApiResponse {
+import {Game} from "@/models/index";
+
+export interface GameApiResponse {
+  count: number;
   results: GameDetailsApiResponse[];
 }
 
@@ -33,4 +36,9 @@ export interface GameItemResponse {
   }[];
   // genres: Genre[];
   // platforms: Platform[];
+}
+
+export interface PagedGameResponse {
+  recordCount: number;
+  games: Game[];
 }
