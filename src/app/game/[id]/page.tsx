@@ -1,5 +1,6 @@
 import Sidebar from "./sidebar";
-import {getGameDetails} from "@/services/gameService";
+import { getGameDetails } from "@/services/gameService";
+import Image from "next/image";
 
 export default async function details({
   params,
@@ -10,17 +11,17 @@ export default async function details({
   const gameDetails = await getGameDetails(id);
 
   return (
-    <div className="row">
-      <div className="col-sm-8">
-        <div className="card">
+    <div className="">
+      <div className="">
+        <div className="">
           <img
             src={gameDetails.backgroundImage}
-            className="card-img-top"
+            className=""
             alt={gameDetails.name}
           />
-          <div className="card-body">
-            <h5 className="card-title">{gameDetails.name}</h5>
-            <p className="card-text">{gameDetails.description}</p>
+          <div className="">
+            <h5 className="">{gameDetails.name}</h5>
+            <p className="">{gameDetails.description}</p>
           </div>
         </div>
       </div>
@@ -28,5 +29,3 @@ export default async function details({
     </div>
   );
 }
-
-

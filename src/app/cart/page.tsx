@@ -9,7 +9,7 @@ export default function Cart() {
         <>
             <div className="row">
                 <div className="col-12">
-                    <h1 className="text-center">Cart</h1>
+                    <p className="text-3xl text-blue-900">Cart-HHH</p>
                 </div>
             </div>
             <div className="row">

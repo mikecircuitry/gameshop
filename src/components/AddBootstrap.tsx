@@ -3,7 +3,7 @@ import { useEffect } from "react";
 
 export default function AddBootstrap() {
   useEffect(() => {
-      import("bootstrap");
+     // import("bootstrap");
 
   }, []);
 
