@@ -1,10 +1,10 @@
 interface PaginationProps {
-  currentPage: number;
+  currentPage?: number;
   totalPages?: number;
 }
 
 export default function Pagination({
-  currentPage,
+  currentPage = 1,
   totalPages = 10,
 }: PaginationProps) {
   const nextPage = currentPage + 1;
@@ -16,7 +16,7 @@ export default function Pagination({
     "z-10 bg-indigo-600 text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600";
 
   return (
-    <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
+    <div className="mt-4 flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
       <div className="flex flex-1 justify-between sm:hidden">
         <a
           href={`/games/${prevPage}`}
