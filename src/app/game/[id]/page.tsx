@@ -1,6 +1,6 @@
 import Sidebar from "./sidebar";
-import { getGameDetails } from "@/services/gameService";
-import Image from "next/image";
+import { gameApiService } from "@/services/gameService";
+// import Image from "next/image";
 
 export default async function details({
   params,
@@ -8,7 +8,7 @@ export default async function details({
   params: Promise<{ id: number }>;
 }) {
   const { id } = await params;
-  const gameDetails = await getGameDetails(id);
+  const gameDetails = await gameApiService.getGameById(id);
 
   return (
     <div className="">
