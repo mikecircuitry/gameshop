@@ -1,4 +1,4 @@
-import {Game} from "@/models/index";
+import { Game } from "@features/games/types";
 
 export interface GameApiResponse {
   count: number;

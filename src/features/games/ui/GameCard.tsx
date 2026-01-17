@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { ReactNode } from "react";
-import { Game } from "@/models";
+
+import { Game } from "@features/games/types";
 
 export interface GameCardProp {
   game: Game;

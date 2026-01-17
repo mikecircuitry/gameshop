@@ -6,7 +6,7 @@ import {
   ReactNode,
   useEffect,
 } from "react";
-import { Cart, Product } from "@/models";
+import { Cart, Product } from "@features/cart/types";
 
 interface CartContextType {
   cart: Cart;

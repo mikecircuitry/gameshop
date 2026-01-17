@@ -1,9 +1,9 @@
 "use client";
-import { loginAction } from "@/app/auth/loginAction";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { loginAction } from "@/features/auth/actions";
 
-export default function LoginComponent() {
+export const LoginComponent = () => {
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
@@ -51,4 +51,4 @@ export default function LoginComponent() {
       </form>
     </div>
   );
-}
+};

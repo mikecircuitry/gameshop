@@ -1,10 +1,6 @@
 "use server";
-import { authenticateUser } from "@/services/authService";
-
-export type ResponseResult = {
-  success: boolean;
-  message?: string;
-};
+import { authenticateUser } from "@/features/auth/domain";
+import { ResponseResult } from "@/features/auth/types";
 
 export async function loginAction(formData: FormData): Promise<ResponseResult> {
   const email = formData.get("username") as string;

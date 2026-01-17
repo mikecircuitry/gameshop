@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useCart } from "@/contexts/cartContext";
+import { useCart } from "@/shared/providers/cartContext";
 
 export default function NavBar() {
   const { cartItemCount } = useCart();
@@ -8,8 +8,8 @@ export default function NavBar() {
   return (
     <nav className="border-gray-200 bg-white dark:bg-gray-900">
       <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
-        <Link
-          href="/"
+        <a
+          href="/public"
           className="flex items-center space-x-3 rtl:space-x-reverse"
         >
           <img
@@ -20,7 +20,7 @@ export default function NavBar() {
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
             Games Are Us
           </span>
-        </Link>
+        </a>
 
         <div className="hiddenx w-full md:block md:w-auto" id="navbar-default">
           <ul className="mt-4 flex flex-col rounded-lg border border-gray-100 bg-gray-50 p-4 font-medium md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:p-0 rtl:space-x-reverse dark:border-gray-700 dark:bg-gray-800 md:dark:bg-gray-900">

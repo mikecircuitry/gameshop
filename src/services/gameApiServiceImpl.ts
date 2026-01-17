@@ -4,11 +4,11 @@ import {
   GameItemResponse,
   PagedGameResponse,
 } from "@/models/responses";
-import { Game, GameDetails } from "@/models";
 import {
   GameAPIService,
   GameAPIServiceDependencies,
 } from "@/services/gameService";
+import { Game, GameDetails } from "@features/games/types";
 
 export const createGameAPIService = ({
   httpClient,

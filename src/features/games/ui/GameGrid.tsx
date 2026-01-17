@@ -1,6 +1,6 @@
 "use client";
-import { Game } from "@/models";
-import GameCard from "@/components/GameCard";
+import GameCard from "@features/games/ui/GameCard";
+import { Game } from "@features/games/types";
 
 export interface gameGridProps {
   games: Game[];

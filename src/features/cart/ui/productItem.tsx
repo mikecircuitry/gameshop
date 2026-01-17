@@ -1,6 +1,5 @@
-import { Product } from "@/models";
-import { useCart } from "@/contexts/cartContext";
-import Image from "next/image";
+import { useCart } from "@/shared/providers/cartContext";
+import { Product } from "@features/cart/types";
 
 interface ProductListItemProp {
   product: Product;
