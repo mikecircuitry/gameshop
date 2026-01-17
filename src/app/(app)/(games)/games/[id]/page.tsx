@@ -1,6 +1,5 @@
-import GameGrid from "@/components/GameGrid";
-import Pagination from "@/components/Pagination";
 import { gameApiService } from "@/services/gameService";
+import { GameListScreen } from "@features/games/ui/GameListScreen";
 
 export default async function page({
   params,
@@ -12,10 +11,5 @@ export default async function page({
   const pageNo = Number(id);
   const gameResponse = await gameApiService.getPagedGames(pageNo); // await getPagedGames(pageNo);
 
-  return (
-    <div>
-      <GameGrid games={gameResponse.games} />
-      <Pagination currentPage={pageNo} />
-    </div>
-  );
+  return <GameListScreen games={gameResponse.games} pageNo={pageNo} />;
 }

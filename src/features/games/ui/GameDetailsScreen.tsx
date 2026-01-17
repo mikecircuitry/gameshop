@@ -1,15 +1,11 @@
-import Sidebar from "./sidebar";
-import { gameApiService } from "@/services/gameService";
+import { GameDetailsSidebar } from "@features/games/ui/GameDetailsSidebar";
+import { GameDetails } from "@features/games/types";
 
+export type GameDetailsScreenProps = {
+  gameInfo: GameDetails;
+};
 
-export default async function details({
-  params,
-}: {
-  params: Promise<{ id: number }>;
-}) {
-  const { id } = await params;
-  const gameInfo = await gameApiService.getGameById(id);
-
+export const GameDetailsScreen = ({ gameInfo }: GameDetailsScreenProps) => {
   return (
     <div className="flex flex-row gap-5">
       <div className="">
@@ -18,8 +14,6 @@ export default async function details({
             src={gameInfo.backgroundImage}
             className=""
             alt={gameInfo.name}
-           
-            
           />
           <div className="">
             <h5 className="text-2xl text-red-500">{gameInfo.name}</h5>
@@ -27,7 +21,7 @@ export default async function details({
           </div>
         </div>
       </div>
-      <Sidebar gameInfo={gameInfo} />
+      <GameDetailsSidebar gameInfo={gameInfo} />
     </div>
   );
-}
+};

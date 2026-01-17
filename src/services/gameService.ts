@@ -1,6 +1,6 @@
-import { GameDetails } from "@/models";
 import { PagedGameResponse } from "@/models/responses";
 import { createGameAPIService } from "@/services/gameApiServiceImpl";
+import { GameDetails } from "@features/games/types";
 
 export interface GameAPIService {
   getPagedGames(pageNum?: number): Promise<PagedGameResponse>;
