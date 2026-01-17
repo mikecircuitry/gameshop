@@ -11,6 +11,7 @@ export default function Sidebar({gameInfo}: SidebarProps) {
     const {addToCart} = useCart();
     const [currentPlatform, setPlatform] = useState(GamePlatform.PS5);
     const [quantity, setQuantity] = useState(1);
+    // I can add edits here
 
     const addToCartClicked = () => {
         addToCart({

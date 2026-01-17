@@ -1,6 +1,6 @@
 import Sidebar from "./sidebar";
 import { gameApiService } from "@/services/gameService";
-// import Image from "next/image";
+
 
 export default async function details({
   params,
@@ -8,24 +8,26 @@ export default async function details({
   params: Promise<{ id: number }>;
 }) {
   const { id } = await params;
-  const gameDetails = await gameApiService.getGameById(id);
+  const gameInfo = await gameApiService.getGameById(id);
 
   return (
-    <div className="">
+    <div className="flex flex-row gap-5">
       <div className="">
         <div className="">
           <img
-            src={gameDetails.backgroundImage}
+            src={gameInfo.backgroundImage}
             className=""
-            alt={gameDetails.name}
+            alt={gameInfo.name}
+           
+            
           />
           <div className="">
-            <h5 className="">{gameDetails.name}</h5>
-            <p className="">{gameDetails.description}</p>
+            <h5 className="text-2xl text-red-500">{gameInfo.name}</h5>
+            <p className="">{gameInfo.description}</p>
           </div>
         </div>
       </div>
-      <Sidebar gameInfo={gameDetails} />
+      <Sidebar gameInfo={gameInfo} />
     </div>
   );
 }
