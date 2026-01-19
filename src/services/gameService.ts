@@ -16,8 +16,8 @@ export interface GameAPIServiceDependencies {
 
 const createDependencies = (): GameAPIServiceDependencies => ({
   httpClient: fetch,
-  gameApiUrl: process.env.NEXT_PUBLIC_API_URL || "",
-  gameApiKey: process.env.NEXT_PUBLIC_API_KEY || "",
+  gameApiUrl: (process.env.RAWG_API_URL || "") + "/games",
+  gameApiKey: process.env.RAWG_API_KEY || "",
 });
 
 export const gameApiService = createGameAPIService(createDependencies());

@@ -4,10 +4,7 @@ import {
   GameItemResponse,
   PagedGameResponse,
 } from "@/models/responses";
-import {
-  GameAPIService,
-  GameAPIServiceDependencies,
-} from "@/services/gameService";
+import { GameAPIService, GameAPIServiceDependencies } from "@/services/gameService";
 import { Game, GameDetails } from "@features/games/types";
 
 export const createGameAPIService = ({
@@ -15,9 +12,7 @@ export const createGameAPIService = ({
   gameApiUrl,
   gameApiKey,
 }: GameAPIServiceDependencies): GameAPIService => {
-  const mapGameApiResponseToGames = (
-    apiGameData: GameDetailsApiResponse,
-  ): Game => {
+  const mapGameApiResponseToGames = (apiGameData: GameDetailsApiResponse): Game => {
     return {
       id: apiGameData.id,
       name: apiGameData.name,
@@ -26,16 +21,14 @@ export const createGameAPIService = ({
     };
   };
 
-  const mapGameDetailsApiResponsetoGameDetails = (
-    apiData: GameItemResponse,
-  ): GameDetails => {
+  const mapGameDetailsApiResponsetoGameDetails = (apiData: GameItemResponse): GameDetails => {
     return {
       id: apiData.id,
       name: apiData.name,
       description: apiData.description_raw,
       backgroundImage: apiData.background_image,
       rating: apiData.rating,
-      developer: apiData.developers[0].name,
+      developer: apiData.developers[0]?.name ?? "",
       platforms: apiData.platforms.map((x) => ({
         id: x.platform.id,
         name: x.platform.name,
@@ -57,9 +50,7 @@ export const createGameAPIService = ({
     },
 
     getGameById: async (id: number): Promise<GameDetails> => {
-      const response = await httpClient(
-        `${gameApiUrl}/${id}?key=${gameApiKey}`,
-      );
+      const response = await httpClient(`${gameApiUrl}/${id}?key=${gameApiKey}`);
       const data: GameItemResponse = await response.json();
 
       return mapGameDetailsApiResponsetoGameDetails(data);
