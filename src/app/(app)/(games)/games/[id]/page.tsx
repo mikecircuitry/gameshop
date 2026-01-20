@@ -1,5 +1,5 @@
-import { GameListScreen } from "@features/games/ui/GameListScreen";
-import { getGames } from "@features/games/queries";
+import { GameListScreen } from "@features/games/components/GameListScreen";
+import { getGames } from "@features/games/service";
 
 export default async function page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;

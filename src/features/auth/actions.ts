@@ -1,5 +1,5 @@
 "use server";
-import { authenticateUser } from "@/features/auth/domain";
+import { authenticateUser } from "@features/auth/service";
 import { ResponseResult } from "@/features/auth/types";
 
 export async function loginAction(formData: FormData): Promise<ResponseResult> {

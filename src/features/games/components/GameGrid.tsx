@@ -1,5 +1,5 @@
 "use client";
-import GameCard from "@features/games/ui/GameCard";
+import GameCard from "@features/games/components/GameCard";
 import { Game } from "@features/games/types";
 
 export interface gameGridProps {

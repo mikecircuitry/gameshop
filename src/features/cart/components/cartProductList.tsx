@@ -1,6 +1,6 @@
 "use client";
 import { useCart } from "@/shared/providers/cartContext";
-import ProductListItem from "@features/cart/ui/productItem";
+import ProductListItem from "@features/cart/components/productItem";
 
 export default function CartProductList() {
   const { cart, clearCart, cartItemCount } = useCart();
@@ -19,11 +19,7 @@ export default function CartProductList() {
           <h4>{cartItemCount} Items in your cart:</h4>
 
           {cart.items.map((item) => (
-            <div
-              className="row"
-              key={item.id + item.platform}
-              style={{ paddingBottom: "20px" }}
-            >
+            <div className="row" key={item.id + item.platform} style={{ paddingBottom: "20px" }}>
               <ProductListItem product={item} />
             </div>
           ))}

@@ -1,5 +1,5 @@
-import GameGrid from "@features/games/ui/GameGrid";
-import Pagination from "@features/games/ui/Pagination";
+import GameGrid from "@features/games/components/GameGrid";
+import Pagination from "@features/games/components/Pagination";
 
 import { Game } from "@features/games/types";
 

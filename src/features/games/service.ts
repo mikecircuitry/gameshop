@@ -3,12 +3,12 @@ import "server-only";
 import {
   getGameById as getGameByIdApi,
   getGames as getGamesApi,
-} from "@/server/client/rawg/rawg.api";
+} from "@features/games/integration/rawg/rawg.api";
 import { GameDetails, GetGamesResponse } from "@features/games/types";
 import {
   mapGameDetailsResponseToGameDetails,
   mapGameListResponseToGames,
-} from "@features/games/mappers";
+} from "@features/games/integration/rawg/mappers";
 
 export async function getGames(
   pageNum: number = 1,

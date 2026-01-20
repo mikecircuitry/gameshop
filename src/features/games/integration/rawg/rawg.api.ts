@@ -2,7 +2,7 @@ import "server-only";
 import * as z from "zod";
 import rawgClient from "./client";
 import { operations } from "./schema";
-import { Result } from "@/shared/models/types";
+import { Result } from "@/shared/types";
 
 type gamesListParams = operations["games_list"]["parameters"]["query"];
 // export type gamesListResponse =
@@ -41,8 +41,6 @@ export const getGames = async (query: gamesListParams): Promise<Result<gamesList
   });
 
   if (response.ok) {
-    // const respData: unknown = await response.json();
-    console.log(data);
     const results = gameListSchema.safeParse(data);
     if (!results.success) {
       console.error(`Error parsing game list:`, results.error);

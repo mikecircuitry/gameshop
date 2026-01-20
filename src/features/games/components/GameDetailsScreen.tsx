@@ -1,4 +1,4 @@
-import { GameDetailsSidebar } from "@features/games/ui/GameDetailsSidebar";
+import { GameDetailsSidebar } from "@features/games/components/GameDetailsSidebar";
 import { GameDetails } from "@features/games/types";
 
 export type GameDetailsScreenProps = {
@@ -10,11 +10,7 @@ export const GameDetailsScreen = ({ gameInfo }: GameDetailsScreenProps) => {
     <div className="flex flex-row gap-5">
       <div className="">
         <div className="">
-          <img
-            src={gameInfo.backgroundImage}
-            className=""
-            alt={gameInfo.name}
-          />
+          <img src={gameInfo.backgroundImage} className="" alt={gameInfo.name} />
           <div className="">
             <h5 className="text-2xl text-red-500">{gameInfo.name}</h5>
             <p className="">{gameInfo.description}</p>

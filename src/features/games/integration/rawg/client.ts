@@ -1,5 +1,5 @@
 import "server-only";
-import type { paths } from "@/server/client/rawg/schema";
+import type { paths } from "@features/games/integration/rawg/schema";
 import createClient, { type Middleware } from "openapi-fetch";
 
 const baseUrl = process.env.RAWG_API_URL;

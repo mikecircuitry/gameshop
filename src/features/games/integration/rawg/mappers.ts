@@ -1,4 +1,5 @@
-import { gameDetailsResponse, gamesListResponse } from "@/server/client/rawg/rawg.api";
+import "server-only";
+import { gameDetailsResponse, gamesListResponse } from "@features/games/integration/rawg/rawg.api";
 import { Game, GameDetails } from "@features/games/types";
 
 export const mapGameListResponseToGames = (response: gamesListResponse): Game[] => {
