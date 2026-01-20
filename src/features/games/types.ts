@@ -28,3 +28,7 @@ export enum GamePlatform {
   XBOX_SERIES_X = "XBOX SERIES X",
   NINTENDO_SWITCH = "NINTENDO SWITCH",
 }
+export type GetGamesResponse = {
+  games: Game[];
+  recordCount: number;
+};

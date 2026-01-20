@@ -1,39 +1,76 @@
 import "server-only";
+import * as z from "zod";
 import rawgClient from "./client";
 import { operations } from "./schema";
 import { Result } from "@/shared/models/types";
 
-export type gamesListParams = operations["games_list"]["parameters"]["query"];
-export type gamesListResponse =
-  operations["games_list"]["responses"]["200"]["content"]["application/json"];
+type gamesListParams = operations["games_list"]["parameters"]["query"];
+// export type gamesListResponse =
+//   operations["games_list"]["responses"]["200"]["content"]["application/json"];
+//
+// export type gameDetailsResponse =
+//   operations["games_read"]["responses"]["200"]["content"]["application/json"];
+// export type game = components["schemas"]["Game"];
 
-export type gameDetailsResponse =
-  operations["games_read"]["responses"]["200"]["content"]["application/json"];
+const gameSchema = z.object({
+  id: z.number().optional(),
+  name: z.string().optional(),
+  background_image: z.string().optional(),
+  rating: z.number(),
+});
+const gameListSchema = z.object({
+  count: z.number(),
+  next: z.string().optional(),
+  previous: z.string().optional().nullable(),
+  results: z.array(gameSchema),
+});
+const gameDetailsSchema = z.object({
+  ...gameSchema.shape,
+  description_raw: z.string(),
+  released: z.string().optional(),
+});
+
+export type gamesListResponse = z.infer<typeof gameListSchema>;
+export type gameDetailsResponse = z.infer<typeof gameDetailsSchema>;
 
 export const getGames = async (query: gamesListParams): Promise<Result<gamesListResponse>> => {
-  const { data, error } = await rawgClient.GET("/games", {
+  const { data, response } = await rawgClient.GET("/games", {
     params: {
       query,
     },
   });
-  if (error) {
-    console.error("Error fetching games:", error);
-    return { ok: false, error };
+
+  if (response.ok) {
+    // const respData: unknown = await response.json();
+    console.log(data);
+    const results = gameListSchema.safeParse(data);
+    if (!results.success) {
+      console.error(`Error parsing game list:`, results.error);
+      return { ok: false, error: results.error };
+    }
+    return { ok: true, data: results.data };
+  } else {
+    console.error("Error fetching games:", response.statusText);
+    return { ok: false, error: response.statusText };
   }
-  return { ok: true, data };
 };
 
 export const getGameById = async (gameId: string): Promise<Result<gameDetailsResponse>> => {
-  const { data, error } = await rawgClient.GET("/games/{id}", {
+  const { data, error, response } = await rawgClient.GET("/games/{id}", {
     params: {
       path: { id: gameId },
     },
   });
 
-  if (error) {
+  if (data) {
+    const results = gameDetailsSchema.safeParse(data);
+    if (!results.success) {
+      console.error(`Error parsing game details:`, results.error);
+      return { ok: false, error: results.error };
+    }
+    return { ok: true, data: results.data };
+  } else {
     console.error(`Error fetching game with id ${gameId}:`, error);
-    return { ok: false, error };
+    return { ok: false, error: response.statusText };
   }
-
-  return { ok: true, data };
 };
