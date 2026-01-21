@@ -1,4 +1,4 @@
-import { CartScreen } from "@features/cart/ui/CartScreen";
+import { CartScreen } from "@features/cart/components/CartScreen";
 
 export default function CartPage() {
   return <CartScreen />;

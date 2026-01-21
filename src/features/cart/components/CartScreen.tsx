@@ -1,5 +1,5 @@
-import CartProductList from "@features/cart/ui/cartProductList";
-import { CartSummary } from "@features/cart/ui/CartSummary";
+import CartProductList from "@features/cart/components/cartProductList";
+import { CartSummary } from "@features/cart/components/CartSummary";
 
 export const CartScreen = () => {
   return (

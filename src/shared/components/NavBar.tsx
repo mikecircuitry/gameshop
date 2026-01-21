@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import { useCart } from "@/shared/providers/cartContext";
 
 export default function NavBar() {
@@ -8,10 +7,7 @@ export default function NavBar() {
   return (
     <nav className="border-gray-200 bg-white dark:bg-gray-900">
       <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
-        <a
-          href="/public"
-          className="flex items-center space-x-3 rtl:space-x-reverse"
-        >
+        <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
           <img
             src="https://gmedia.playstation.com/is/image/SIEPDC/dualsense-controller-product-thumbnail-01-en-14sep21?$facebook$"
             className="h-8"
