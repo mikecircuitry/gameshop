@@ -12,6 +12,7 @@ export const GameDetailsSidebar = ({ gameInfo }: SidebarProps) => {
   const [currentPlatform, setPlatform] = useState(GamePlatform.PS5);
   const [quantity, setQuantity] = useState(1);
   // I can add edits here
+  // and here
 
   const addToCartClicked = () => {
     addToCart({
@@ -52,10 +53,7 @@ export const GameDetailsSidebar = ({ gameInfo }: SidebarProps) => {
         <div className="row">
           <div className="col-sm-6">
             <h5>Quantity</h5>
-            <select
-              className="form-select"
-              onChange={(e) => setQuantity(parseInt(e.target.value))}
-            >
+            <select className="form-select" onChange={(e) => setQuantity(parseInt(e.target.value))}>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -80,11 +78,7 @@ export const GameDetailsSidebar = ({ gameInfo }: SidebarProps) => {
 
         <div className="row">
           <div className="col-sm-12">
-            <button
-              className="btn btn-danger"
-              style={{ width: "100%" }}
-              onClick={addToCartClicked}
-            >
+            <button className="btn btn-danger" style={{ width: "100%" }} onClick={addToCartClicked}>
               Add to Cart
             </button>
           </div>

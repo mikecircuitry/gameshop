@@ -3,7 +3,7 @@ import { getGameById } from "@features/games/service";
 
 export default async function details({ params }: { params: Promise<{ id: number }> }) {
   const { id } = await params;
-  const gameInfo = await getGameById(id);
+  // const gameInfo = await getGameById(id);
 
-  return <GameDetailsScreen gameInfo={gameInfo} />;
+  return <GameDetailsScreen id={id} />;
 }

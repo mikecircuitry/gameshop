@@ -1,6 +1,8 @@
 import { ReactNode } from "react";
 
 import { Game } from "@features/games/types";
+import { useQueryClient } from "@tanstack/react-query";
+import { gameQueries } from "@features/games/api/queries";
 
 export interface GameCardProp {
   game: Game;
@@ -8,10 +10,15 @@ export interface GameCardProp {
 }
 
 export default function GameCard({ game, children }: GameCardProp) {
+  const queryClient = useQueryClient();
+  const prepData = () => {
+    queryClient.prefetchQuery({ ...gameQueries.details(game.id), staleTime: 1000 * 60 }); // usePrefetchQuery(gameQueries.details(game.id));
+  };
+
   return (
     <>
-      <div className="rounded shadow-sm shadow-gray-400">
-        <a href={`/game/${game.id}`}>
+      <div className="rounded shadow-sm shadow-gray-400" onMouseEnter={() => prepData}>
+        <a href={`/games/details/${game.id}`}>
           <img
             src={game.backgroundImage}
             className="h-[250] w-full rounded-t-sm object-fill"
