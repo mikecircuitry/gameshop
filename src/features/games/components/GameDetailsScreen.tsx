@@ -1,6 +1,5 @@
 "use client";
 import { GameDetailsSidebar } from "@features/games/components/GameDetailsSidebar";
-import { GameDetails } from "@features/games/types";
 import { gameQueries } from "@features/games/api/queries";
 import { useQuery } from "@tanstack/react-query";
 

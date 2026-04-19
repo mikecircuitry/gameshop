@@ -1,7 +1,6 @@
 import { GameListScreen } from "@features/games/components/GameListScreen";
-import { getGames } from "@features/games/service";
 
-export default async function page({ params }: { params: Promise<{ id: string }> }) {
+export default async function page() {
   // const { id } = await params;
   //
   // const pageNo = Number(id);
